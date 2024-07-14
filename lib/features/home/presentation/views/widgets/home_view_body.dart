@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:swift_admin/core/utils/constance/app_colors.dart';
+import 'package:swift_admin/core/utils/constance/app_styles.dart';
+import 'package:swift_admin/features/theme/presentation/managers/cubit/theme_cubit.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({
@@ -7,6 +12,51 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text('helllo');
+    return CustomScrollView(
+      slivers: [
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 20,
+          ),
+          sliver: SliverAppBar(
+            centerTitle: true,
+            title: Text(
+              'Swift Admin',
+              style: AppStyles.styleSemiBold30(context),
+            ),
+            actions: [
+              BlocBuilder<ThemeCubit, ThemeCubitState>(
+                builder: (context, state) {
+                  return GestureDetector(
+                    onTap: () async {
+                      await BlocProvider.of<ThemeCubit>(context).appTheme(
+                        themeValue:
+                            !BlocProvider.of<ThemeCubit>(context).themeMode,
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      margin: const EdgeInsets.only(right: 7),
+                      decoration: BoxDecoration(
+                        color: BlocProvider.of<ThemeCubit>(context).themeMode
+                            ? AppColors.kPrimaryColor
+                            : Colors.amber,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: Icon(
+                        BlocProvider.of<ThemeCubit>(context).themeMode
+                            ? Ionicons.sunny
+                            : Ionicons.moon,
+                        color: Colors.white,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }
