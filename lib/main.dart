@@ -1,11 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swift_admin/core/services/app_router.dart';
 import 'package:swift_admin/core/utils/app_theme_data.dart';
 import 'package:swift_admin/features/theme/data/repos/theme_repo_impl.dart';
 import 'package:swift_admin/features/theme/presentation/managers/cubit/theme_cubit.dart';
+import 'package:swift_admin/firebase_options.dart';
 
-void main(List<String> args) {
+void main(List<String> args) async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     const SwiftAdmin(),
   );
