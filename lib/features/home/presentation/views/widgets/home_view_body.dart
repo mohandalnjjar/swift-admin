@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swift_admin/features/home/presentation/views/widgets/home_view_sliver_list.dart';
 import 'package:swift_admin/features/home/presentation/views/widgets/homve_view_sliver_app_bar.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -11,6 +12,7 @@ class HomeViewBody extends StatelessWidget {
     return const CustomScrollView(
       slivers: [
         HomeViewSliverAppBar(),
+        HomeViewSliverList(),
       ],
     );
   }
