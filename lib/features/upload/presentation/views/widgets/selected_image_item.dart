@@ -1,12 +1,14 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:swift_admin/core/utils/constance/app_colors.dart';
 
 class DetailedListSelectedImage extends StatelessWidget {
   const DetailedListSelectedImage(
       {super.key, required this.isActive, required this.image});
   final bool isActive;
-  final String image;
+  final XFile image;
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -28,7 +30,7 @@ class DetailedListSelectedImage extends StatelessWidget {
                 )
               : null,
           image: DecorationImage(
-            image: AssetImage(image),
+            image: FileImage(File(image.path)),
           ),
         ),
         child: isActive
